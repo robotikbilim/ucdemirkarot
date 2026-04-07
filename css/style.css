@@ -295,25 +295,32 @@ li > a:only-child:after { content: ''; }
 	#logo {
 		display: block;
 		padding: 0;
-		width: 100%;
-		text-align: center;
+		width: auto;
+		text-align: left;
 		float: none;
+		flex: 1 1 auto;
 	}
 	#logo a.logo-badge {
-		max-width: calc(100vw - 32px);
-		padding: 10px 14px;
+		max-width: min(240px, calc(100vw - 110px));
+		padding: 9px 14px;
+		border-radius: 16px;
 	}
 	#logo a.logo-badge img.site-logo {
 		width: min(170px, 100%);
 	}
 	.menu li.active a {
-		color: #ff4f81;
+		color: #011144;
 	}
 	nav ul li span {
 		color: #fff;
 	}
 	nav {
 		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 14px;
 	}
 	nav a {
 		color: #333;
@@ -328,15 +335,25 @@ li > a:only-child:after { content: ''; }
 
 	/* Stylinf the toggle lable */
 	.toggle {
-		display: block;
-		padding: 5px 15px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 52px;
+		height: 52px;
+		padding: 0;
 		font-size: 20px;
 		text-decoration: none;
-		border: none;
-		float: right;
-		background-color: #ff4f81;
+		border: 1px solid rgba(255, 255, 255, 0.35);
+		float: none;
+		background: rgba(1, 17, 68, 0.78);
 		color: #fff;
 		margin-bottom: 0;
+		margin-left: auto;
+		border-radius: 16px;
+		box-shadow: 0 12px 28px rgba(1, 17, 68, 0.24);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 	}
 	.menu .toggle {
 		float: none;
@@ -350,30 +367,40 @@ li > a:only-child:after { content: ''; }
 	}
 
 	.toggle:hover {
-		color:#333;
-		background-color: #fff;
+		color:#fff;
+		background: rgba(1, 17, 68, 0.95);
+		box-shadow: 0 16px 30px rgba(1, 17, 68, 0.3);
+		transform: translateY(-1px);
 	}
 
 	/* Display Dropdown when clicked on Parent Lable */
 	[id^=drop]:checked + ul {
 		display: block;
-		background: #fff;
-		padding: 15px 0;
+		background: rgba(255, 255, 255, 0.97);
+		padding: 10px;
 		width:100%;
-		text-align: center;
+		text-align: left;
+		border-radius: 20px;
+		box-shadow: 0 24px 55px rgba(1, 17, 68, 0.2);
+		margin-top: 6px;
 	}
 
 	/* Change menu item's width to 100% */
 	nav ul li {
 		display: block;
 		width: 100%;
-		padding: 7px 0;
+		padding: 0;
 		}
 	nav a{
-		padding: 5px 0;
+		display: block;
+		padding: 14px 18px;
+		border-radius: 14px;
+		font-weight: 600;
+		letter-spacing: 0.4px;
 	}
 	nav a:hover {
-		color: #333;
+		color: #011144;
+		background: rgba(244, 178, 0, 0.14);
 	}
 	.login-icon {
 		text-align: center;
@@ -407,6 +434,17 @@ li > a:only-child:after { content: ''; }
 	}
 	nav ul ul li a {
 		font-size: 15px;
+	}
+	.menu {
+		width: 100%;
+		margin-top: 0;
+	}
+	.menu li + li {
+		margin-top: 6px;
+	}
+	.menu li.active a {
+		background: linear-gradient(135deg, rgba(244, 178, 0, 0.22) 0%, rgba(244, 178, 0, 0.1) 100%);
+		border: 1px solid rgba(244, 178, 0, 0.3);
 	}
 	ul.inner-ul{
 		padding: 0!important;
@@ -579,6 +617,37 @@ h4.b-w3ltxt {
 }
 .form-style-w3layout span a {
     color: #ff4f81;
+}
+
+.form-style-w3layout .whatsapp-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #25d366 0%, #17b857 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-align: center;
+    box-shadow: 0 16px 30px rgba(37, 211, 102, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.form-style-w3layout .whatsapp-cta:hover,
+.form-style-w3layout .whatsapp-cta:focus {
+    color: #fff;
+    background: linear-gradient(135deg, #20c35f 0%, #129c49 100%);
+    box-shadow: 0 18px 34px rgba(37, 211, 102, 0.34);
+    transform: translateY(-2px);
+}
+
+.form-style-w3layout .whatsapp-cta span.fa {
+    font-size: 28px;
+    line-height: 1;
 }
 .w3ls_banner_txt h4 {
     font-size: 2em;
@@ -1110,7 +1179,7 @@ h4.destination {
         padding: 20px 0;
     }
 	.toggle {
-    background-color: #f4b200;
+    background: rgba(1, 17, 68, 0.78);
    }
 }
 
@@ -1502,7 +1571,7 @@ a.move-top span{
 }
 @media(max-width:768px) {
 	.toggle {
-    background-color: #f4b200;
+    background: rgba(1, 17, 68, 0.78);
 	}
 }
 @media(max-width:736px) {
@@ -1627,6 +1696,14 @@ h4.title-hny {
 }
 h3.heading {
     font-size: 25px;
+}
+.form-style-w3layout .whatsapp-cta {
+    padding: 14px 16px;
+    font-size: 15px;
+    gap: 10px;
+}
+.form-style-w3layout .whatsapp-cta span.fa {
+    font-size: 24px;
 }
 }
 @media(max-width:414px){
