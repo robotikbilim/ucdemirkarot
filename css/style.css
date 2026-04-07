@@ -1765,8 +1765,11 @@ h3.heading {
         font-size: 24px;
         line-height: 30px;
     }
-.contact-right h5 {
+    .contact-right h5 {
         font-size: 20px;
+    }
+    .contact-right {
+        display: none;
     }
 }
 
