@@ -272,11 +272,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="contact-grids mt-5">
 				<div class="row">
 					<div class="col-lg-6 col-md-6 contact-left-form">
-						<form id="contact-form" action="https://formsubmit.co/gurkansozdemir@gmail.com" method="post" onsubmit="prepareContactForm()">
+						<form id="contact-form" action="https://formsubmit.co/gurkansozdemir@gmail.com" method="post" onsubmit="return submitContactForm(event)">
 							<input type="hidden" name="_subject" value="Ucdemir Karot - Yeni Bilgi Alma Formu">
 							<input type="hidden" name="_captcha" value="false">
 							<input type="hidden" name="_template" value="table">
-							<input type="hidden" name="_next" value="https://www.ucdemirkarot.com/tesekkurler.html">
 							<div class=" form-group contact-forms">
 							  <input type="text" class="form-control" placeholder="Adınız" required="">
 							</div>
@@ -287,7 +286,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							  <input type="text" class="form-control" placeholder="Telefon" required=""> 
 							</div>
 							<div class="form-group contact-forms">
-							  <textarea class="form-control" placeholder="Message" rows="3" required=""></textarea>
+							  <textarea class="form-control" placeholder="Mesajınız" rows="3" required=""></textarea>
 							</div>
 							<button class="btn btn-block sent-butnn">Gönder</button>
 						</form>
@@ -301,6 +300,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 </section>
 <!-- //Contact -->
+
+<div id="success-popup" class="success-popup" aria-hidden="true">
+	<div class="success-popup__dialog">
+		<button type="button" class="success-popup__close" onclick="closeSuccessPopup()" aria-label="Kapat">&times;</button>
+		<h4>Mesajınız başarı ile kaydedildi</h4>
+		<p>En kısa zamanda sizde dönüş yapacağız.</p>
+		<button type="button" class="btn sent-butnn" onclick="closeSuccessPopup()">Tamam</button>
+	</div>
+</div>
 
    <!-- map -->	
 <div class="map p-2">
@@ -356,6 +364,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         </div>
                         <div class="last-vv-contact my-2">
                             <p>+90 (533) 599 23 91</p>
+							<p>+90 (544) 459 23 24</p>
                         </div>
                         <div class="last-vv-contact">
                             <p>Arnavutköy / İstanbul</p>
@@ -386,33 +395,78 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <script>
-function prepareContactForm() {
+function upsertHiddenField(form, name, value) {
+    var existing = form.querySelector('input[type="hidden"][name="' + name + '"]');
+    if (!existing) {
+        existing = document.createElement('input');
+        existing.type = 'hidden';
+        existing.name = name;
+        form.appendChild(existing);
+    }
+    existing.value = value;
+}
+
+function openSuccessPopup() {
+    var popup = document.getElementById('success-popup');
+    if (!popup) {
+        return;
+    }
+    popup.classList.add('is-visible');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('popup-open');
+}
+
+function closeSuccessPopup() {
+    var popup = document.getElementById('success-popup');
+    if (!popup) {
+        return;
+    }
+    popup.classList.remove('is-visible');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('popup-open');
+}
+
+async function submitContactForm(event) {
+    event.preventDefault();
+
     var form = document.getElementById('contact-form');
     if (!form) {
-        return true;
+        return false;
     }
 
     var fields = form.querySelectorAll('.form-control');
-    var data = [
-        { name: 'ad_soyad', value: fields[0] ? fields[0].value : '' },
-        { name: 'eposta', value: fields[1] ? fields[1].value : '' },
-        { name: 'telefon', value: fields[2] ? fields[2].value : '' },
-        { name: 'mesaj', value: fields[3] ? fields[3].value : '' }
-    ];
+    upsertHiddenField(form, 'ad_soyad', fields[0] ? fields[0].value : '');
+    upsertHiddenField(form, 'eposta', fields[1] ? fields[1].value : '');
+    upsertHiddenField(form, 'telefon', fields[2] ? fields[2].value : '');
+    upsertHiddenField(form, 'mesaj', fields[3] ? fields[3].value : '');
 
-    data.forEach(function(item) {
-        var existing = form.querySelector('input[type="hidden"][name="' + item.name + '"]');
-        if (!existing) {
-            existing = document.createElement('input');
-            existing.type = 'hidden';
-            existing.name = item.name;
-            form.appendChild(existing);
+    try {
+        var response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Form gonderilemedi');
         }
-        existing.value = item.value;
-    });
 
-    return true;
+        form.reset();
+        openSuccessPopup();
+    } catch (error) {
+        alert('Mesaj gonderilirken bir sorun olustu. Lutfen tekrar deneyin.');
+    }
+
+    return false;
 }
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeSuccessPopup();
+    }
+});
 </script>
 </body>
 </html>

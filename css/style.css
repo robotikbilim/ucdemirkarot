@@ -1688,8 +1688,75 @@ h3.heading {
         font-size: 24px;
         line-height: 30px;
     }
-    .contact-right h5 {
+.contact-right h5 {
         font-size: 20px;
+    }
+}
+
+body.popup-open {
+    overflow: hidden;
+}
+
+.success-popup {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(1, 17, 68, 0.72);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 9999;
+}
+
+.success-popup.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.success-popup__dialog {
+    position: relative;
+    width: min(100%, 460px);
+    padding: 34px 28px 28px;
+    border-radius: 18px;
+    background: #fff;
+    text-align: center;
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.2);
+}
+
+.success-popup__dialog h4 {
+    color: #011144;
+    font-size: 28px;
+    margin-bottom: 14px;
+}
+
+.success-popup__dialog p {
+    color: #555;
+    margin-bottom: 22px;
+    font-size: 16px;
+}
+
+.success-popup__close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    border: 0;
+    background: transparent;
+    color: #011144;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+@media(max-width:480px) {
+    .success-popup__dialog {
+        padding: 30px 20px 24px;
+    }
+
+    .success-popup__dialog h4 {
+        font-size: 22px;
     }
 }
 /*-- //Responsive design --*/
