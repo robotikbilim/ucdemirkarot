@@ -64,8 +64,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- nav -->
 		<nav class="py-3 d-lg-flex">
 			<div id="logo">
-				<h1> <a href="index.html">
-                     <img src="images/logo.png" alt="Your logo" title="Your logo" style="width: 200px;" />
+				<h1> <a href="index.html" class="logo-badge">
+                     <img src="images/logo.png" alt="Your logo" title="Your logo" class="site-logo" />
                     </a>
                 </h1>
 			</div>
@@ -272,7 +272,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="contact-grids mt-5">
 				<div class="row">
 					<div class="col-lg-6 col-md-6 contact-left-form">
-						<form action="#" method="post">
+						<form id="contact-form" action="https://formsubmit.co/gurkansozdemir@gmail.com" method="post" onsubmit="prepareContactForm()">
+							<input type="hidden" name="_subject" value="Ucdemir Karot - Yeni Bilgi Alma Formu">
+							<input type="hidden" name="_captcha" value="false">
+							<input type="hidden" name="_template" value="table">
+							<input type="hidden" name="_next" value="https://www.ucdemirkarot.com/tesekkurler.html">
 							<div class=" form-group contact-forms">
 							  <input type="text" class="form-control" placeholder="Adınız" required="">
 							</div>
@@ -381,5 +385,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 
+<script>
+function prepareContactForm() {
+    var form = document.getElementById('contact-form');
+    if (!form) {
+        return true;
+    }
+
+    var fields = form.querySelectorAll('.form-control');
+    var data = [
+        { name: 'ad_soyad', value: fields[0] ? fields[0].value : '' },
+        { name: 'eposta', value: fields[1] ? fields[1].value : '' },
+        { name: 'telefon', value: fields[2] ? fields[2].value : '' },
+        { name: 'mesaj', value: fields[3] ? fields[3].value : '' }
+    ];
+
+    data.forEach(function(item) {
+        var existing = form.querySelector('input[type="hidden"][name="' + item.name + '"]');
+        if (!existing) {
+            existing = document.createElement('input');
+            existing.type = 'hidden';
+            existing.name = item.name;
+            form.appendChild(existing);
+        }
+        existing.value = item.value;
+    });
+
+    return true;
+}
+</script>
 </body>
 </html>

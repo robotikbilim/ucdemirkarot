@@ -172,6 +172,25 @@ nav {
     padding: 0px 0;
     border: none;
 }
+
+#logo a.logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    max-width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 18px;
+    box-shadow: 0 14px 35px rgba(1, 17, 68, 0.18);
+}
+
+#logo a.logo-badge img.site-logo {
+    width: 200px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
 span.fa.fa-free-code-camp {
     color: #f4b200;
     font-weight: bold;
@@ -279,6 +298,13 @@ li > a:only-child:after { content: ''; }
 		width: 100%;
 		text-align: center;
 		float: none;
+	}
+	#logo a.logo-badge {
+		max-width: calc(100vw - 32px);
+		padding: 10px 14px;
+	}
+	#logo a.logo-badge img.site-logo {
+		width: min(170px, 100%);
 	}
 	.menu li.active a {
 		color: #ff4f81;
@@ -1607,6 +1633,13 @@ h3.heading {
 	.banner-text-w3ls {
     padding: 24vw 0 1vw;
     }
+	#logo a.logo-badge {
+    max-width: calc(100vw - 24px);
+    padding: 8px 12px;
+   }
+	#logo a.logo-badge img.site-logo {
+    width: min(145px, 100%);
+   }
 	.rating ul li {
     font-size: 1.2em;
    }
@@ -1624,6 +1657,9 @@ h3.heading {
 h3.heading {
     letter-spacing: 0px;
 }
+	#logo a.logo-badge img.site-logo {
+    width: min(130px, 100%);
+   }
 }
 /* Mobil uyumluluk için ek ayarlar */
 @media (max-width: 768px) {
