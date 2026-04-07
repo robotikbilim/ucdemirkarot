@@ -330,12 +330,12 @@ li > a:only-child:after { content: ''; }
 	/* Also hide the  */
 	.toggle + a,
 	.menu {
-		display: none;
+		display: none !important;
 	}
 
 	/* Stylinf the toggle lable */
 	.toggle {
-		display: inline-flex;
+		display: none !important;
 		align-items: center;
 		justify-content: center;
 		width: 52px;
@@ -375,7 +375,7 @@ li > a:only-child:after { content: ''; }
 
 	/* Display Dropdown when clicked on Parent Lable */
 	[id^=drop]:checked + ul {
-		display: block;
+		display: none !important;
 		background: rgba(255, 255, 255, 0.97);
 		padding: 10px;
 		width:100%;
@@ -1297,7 +1297,7 @@ button.sent-butnn {
 /*-- footer --*/
 
 .footer-content {
-   background: #011144;
+   background: #f4b200;
 }
 
 .footer-top-inner-vv {
